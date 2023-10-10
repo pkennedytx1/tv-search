@@ -3,12 +3,20 @@ import SearchInput from '../component/SearchInput';
 import SearchList from './SearchList';
 import axios from 'axios'
 ;
-export default function Main() {
+export default function Main({
+    handleShowFavorited,
+    favorites
+}) {
     const [searchTermInput, setSearchTermInput] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [showData, setShowData] = useState([]);
+    const [isSearchTermValid, setIsSearchTermValid] = useState(true);
     
     const searchShow = (term) => {
+        if (!term) {
+            setIsSearchTermValid(false);
+            return false;
+        }
         setSearchTerm(term)
         setSearchTermInput('')
     }
@@ -31,8 +39,15 @@ export default function Main() {
                 searchTermInput={searchTermInput}
                 setSearchTermInput={setSearchTermInput}
                 searchShow={searchShow}
+                isSearchTermValid={isSearchTermValid}
+                setIsSearchTermValid={setIsSearchTermValid}
             />
-            <SearchList showData={showData} searchTerm={searchTerm} />
+            <SearchList
+                showData={showData}
+                searchTerm={searchTerm}
+                handleShowFavorited={handleShowFavorited}
+                favorites={favorites}
+            />
         </div>
     )
 }

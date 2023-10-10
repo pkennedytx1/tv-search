@@ -1,9 +1,10 @@
-import Main from './containers/Main';
+
+import TvSearch from './containers/TvSearch';
 
 function App() {
   return (
     <div className="App">
-      <Main />
+      <TvSearch />
     </div>
   );
 }
