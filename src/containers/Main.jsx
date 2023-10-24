@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import SearchInput from '../component/SearchInput';
 import SearchList from './SearchList';
-import axios from 'axios'
-;
+import { PageHeader } from '../component/STitle';
+import axios from 'axios';
+
 export default function Main({
     handleShowFavorited,
+    handleToWatchLater,
     favorites
 }) {
     const [searchTermInput, setSearchTermInput] = useState('');
@@ -33,8 +35,10 @@ export default function Main({
     }, [searchTerm])
 
     return(
-        <div style={{ margin: '0 auto', maxWidth: '400px', marginTop: '40px' }}>
-            <h1 style={{ textAlign: 'center' }} >TV Show Search</h1>
+        <div>
+            <PageHeader>
+                TV Show Search
+            </PageHeader>
             <SearchInput
                 searchTermInput={searchTermInput}
                 setSearchTermInput={setSearchTermInput}
@@ -46,6 +50,7 @@ export default function Main({
                 showData={showData}
                 searchTerm={searchTerm}
                 handleShowFavorited={handleShowFavorited}
+                handleToWatchLater={handleToWatchLater}
                 favorites={favorites}
             />
         </div>
