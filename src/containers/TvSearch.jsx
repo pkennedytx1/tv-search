@@ -1,18 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import Main from './Main';
 import Favorites from './Favorites';
 import ToWatch from './ToWatch';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Navigation from '../component/Navigation';
 
 export default function TvSearch() {
     const [favorites, setFavorites] = useState([])
     const [watchLater, setWatchLater] = useState([])
 
-    const handleShowFavorited = (id) => {
-        if (favorites.includes(id)) {
-            const newFavs = favorites.filter((fav) => fav !== id);
+    const handleShowFavorited = (showData) => {
+        console.log(showData);
+        const { id } = showData
+        if (favorites.find((show) => show.id === id)) {
+            const newFavs = favorites.filter((fav) => fav.id !== id);
             setFavorites(newFavs)
         } else {
-            setFavorites([...favorites, id]);
+            setFavorites([...favorites, showData]);
         }
     }
 
@@ -26,17 +30,43 @@ export default function TvSearch() {
         }
     }
 
+    const appRouter = createBrowserRouter([
+        {
+            path: "/",
+            element:
+                <>
+                    <Navigation />
+                    <Main
+                        handleShowFavorited={handleShowFavorited}
+                        handleToWatchLater={handleToWatchLater}
+                        favorites={favorites}
+                    />
+                </>
+        },
+        {
+            path: "/favorites",
+            element:
+                <>
+                    <Navigation />
+                    <Favorites favorites={favorites} />
+                </>
+        },
+        {
+            path: "/watch_later",
+            element:
+                <>
+                    <Navigation />
+                    <ToWatch
+                        watchLater={watchLater}
+                        handleToWatchLater={handleToWatchLater}
+                    />
+                </>
+        }
+    ]);
+
     return(
         <>
-            <ToWatch
-                watchLater={watchLater}
-                handleToWatchLater={handleToWatchLater}
-            />
-            <Main
-                handleShowFavorited={handleShowFavorited}
-                handleToWatchLater={handleToWatchLater}
-                favorites={favorites}
-            />
+            <RouterProvider router={appRouter} />
         </>
     )
 }

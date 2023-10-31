@@ -11,6 +11,7 @@ export default function ToWatch({
             <PageHeader>
                 To Watch Later
             </PageHeader>
+            {watchLater.length === 0 && <h3 style={{ textAlign: 'center' }}>No Shows Saved for Later</h3>}
             {watchLater?.map((show) => {
                 const {id, name} = show
                 return(

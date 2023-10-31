@@ -26,9 +26,13 @@ export default function SearchList({
                                         <Card.Title>{name && name}</Card.Title>
                                         <Card.Subtitle className="mb-2 text-muted">Rating: {show?.score}</Card.Subtitle>
                                         {summary && parse(summary)}
-                                        <Button onClick={() => handleShowFavorited(id)} variant="light">
+                                        <Button onClick={() => handleShowFavorited({
+                                            id,
+                                            name,
+                                            imdb
+                                        })} variant="light">
                                             {
-                                                favorites?.includes(id) ?
+                                                favorites?.find((show) => show.id === id) ?
                                                 <FavoriteIconFilled size='36' color='#FF0000'/> :
                                                 <FavoriteIconOutlined size='36' color='#FF0000'/>
                                             }
