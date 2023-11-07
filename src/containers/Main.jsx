@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import SearchInput from '../component/SearchInput';
 import SearchList from './SearchList';
 import { PageHeader } from '../component/STitle';
 import axios from 'axios';
+import { ShowContext } from '../contexts/ShowContext';
 
 export default function Main({
     handleShowFavorited,
     handleToWatchLater,
     favorites
 }) {
+    const { setSearchTerm } = useContext(ShowContext);
     const [searchTermInput, setSearchTermInput] = useState('');
-    const [searchTerm, setSearchTerm] = useState('');
-    const [showData, setShowData] = useState([]);
     const [isSearchTermValid, setIsSearchTermValid] = useState(true);
     
     const searchShow = (term) => {
@@ -22,17 +22,6 @@ export default function Main({
         setSearchTerm(term)
         setSearchTermInput('')
     }
-
-    const searchTVShow = async () => {
-        const { data } = await axios.get(`http://api.tvmaze.com/search/shows?q=${searchTerm}`);
-        setShowData(data);
-    }
-
-    useEffect(() => {
-        if (searchTerm) {
-            searchTVShow();
-        }
-    }, [searchTerm])
 
     return(
         <div>
@@ -47,8 +36,6 @@ export default function Main({
                 setIsSearchTermValid={setIsSearchTermValid}
             />
             <SearchList
-                showData={showData}
-                searchTerm={searchTerm}
                 handleShowFavorited={handleShowFavorited}
                 handleToWatchLater={handleToWatchLater}
                 favorites={favorites}

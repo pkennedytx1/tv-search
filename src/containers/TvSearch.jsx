@@ -4,6 +4,7 @@ import Favorites from './Favorites';
 import ToWatch from './ToWatch';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Navigation from '../component/Navigation';
+import { ShowProvider } from '../contexts/ShowContext';
 
 export default function TvSearch() {
     const [favorites, setFavorites] = useState([])
@@ -66,7 +67,9 @@ export default function TvSearch() {
 
     return(
         <>
-            <RouterProvider router={appRouter} />
+            <ShowProvider>
+                <RouterProvider router={appRouter} />
+            </ShowProvider>
         </>
     )
 }

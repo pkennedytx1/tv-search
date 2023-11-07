@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { PageHeader } from '../component/STitle'
 import { Container, Card, Row, Col, Form, Button } from 'react-bootstrap';
+import { ShowContext } from '../contexts/ShowContext';
 
 export default function Favorites({ favorites }) {
-    console.log(favorites);
+    const context = useContext(ShowContext);
+    console.log(context);
     return(
         <Container>
             <PageHeader>
                 My Favorites
             </PageHeader>
-            {favorites.length === 0 && <h3 style={{ textAlign: 'center' }}>No Shows Saved for Later</h3>}
+            {favorites.length === 0 && <h3 style={{ textAlign: 'center' }}>No Favorites Saved</h3>}
             {favorites?.map((show) => {
                 const {id, name} = show
                 return(

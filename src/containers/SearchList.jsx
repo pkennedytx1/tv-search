@@ -1,16 +1,16 @@
-import React, { createElement } from 'react';
+import React, { createElement, useContext } from 'react';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { FavoriteIconOutlined, FavoriteIconFilled } from '../component/icons';
 import { ShowCard } from '../component/SShowCard';
 import parse from 'html-react-parser';
+import { ShowContext } from '../contexts/ShowContext';
 
 export default function SearchList({ 
-    showData,
-    searchTerm,
     handleShowFavorited,
     handleToWatchLater,
     favorites
 }) {
+    const { showData, searchTerm } = useContext(ShowContext);
     return(
         <>
             <h2 style={{ textAlign: 'center' }} >{showData?.length > 0 && `Results for: ${searchTerm}`}</h2>
