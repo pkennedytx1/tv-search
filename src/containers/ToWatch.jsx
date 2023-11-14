@@ -14,6 +14,7 @@ export default function ToWatch({
             {watchLater.length === 0 && <h3 style={{ textAlign: 'center' }}>No Shows Saved for Later</h3>}
             {watchLater?.map((show) => {
                 const {id, name} = show
+                console.log(show)
                 return(
                     <Card key={id}>
                         <Row>
