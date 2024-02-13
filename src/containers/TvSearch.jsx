@@ -2,31 +2,31 @@ import React, { useState, useEffect } from 'react'
 import Main from './Main';
 import Favorites from './Favorites';
 import ToWatch from './ToWatch';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter, redirect } from 'react-router-dom';
 import Navigation from '../component/Navigation';
 import { ShowProvider } from '../contexts/ShowContext';
 import { createWatchLater, getAllWatchLater } from '../utils/endpoints/toWatchLater.js';
+import { getFavorites } from '../utils/endpoints/favorites.js';
+import Auth from './Auth.jsx';
+import PrivateRoute from '../component/PrivateRoute.jsx';
 
 export default function TvSearch() {
     const [favorites, setFavorites] = useState([])
     const [watchLater, setWatchLater] = useState([])
 
     useEffect(() => {
-        handleGetWatchLater();
+        getFavorites()
     }, [])
-
-    const handleGetWatchLater = async () => {
-        const watchLaterData = await getAllWatchLater();
-        setWatchLater(watchLaterData);
-    }
 
     const handleShowFavorited = async (showData) => {
         console.log(showData);
         const { id } = showData
         if (favorites.find((show) => show.id === id)) {
             const newFavs = favorites.filter((fav) => fav.id !== id);
+            // Favorites POST
             setFavorites(newFavs)
         } else {
+            // Favorites POST
             setFavorites([...favorites, showData]);
         }
     }
@@ -58,20 +58,28 @@ export default function TvSearch() {
         {
             path: "/favorites",
             element:
-                <>
+                <PrivateRoute>
                     <Navigation />
                     <Favorites favorites={favorites} />
-                </>
+                </PrivateRoute>
         },
         {
             path: "/watch_later",
             element:
-                <>
+                <PrivateRoute>
                     <Navigation />
                     <ToWatch
                         watchLater={watchLater}
                         handleToWatchLater={handleToWatchLater}
                     />
+                </PrivateRoute>
+        },
+        {
+            path: "/auth",
+            element:
+                <>
+                    <Navigation />
+                    <Auth />
                 </>
         }
     ]);
