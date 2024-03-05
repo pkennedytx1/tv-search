@@ -11,7 +11,8 @@ export const ShowProvider = ({ children }) => {
         if (searchTerm) {
             searchTVShow();
         }
-    }, [searchTerm, searchTVShow])
+    // eslint-disable-next-line
+    }, [searchTerm])
 
     const searchTVShow = async () => {
         const { data } = await axios.get(`http://api.tvmaze.com/search/shows?q=${searchTerm}`);
