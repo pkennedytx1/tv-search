@@ -11,7 +11,7 @@ export const ShowProvider = ({ children }) => {
         if (searchTerm) {
             searchTVShow();
         }
-    }, [searchTerm])
+    }, [searchTerm, searchTVShow])
 
     const searchTVShow = async () => {
         const { data } = await axios.get(`http://api.tvmaze.com/search/shows?q=${searchTerm}`);

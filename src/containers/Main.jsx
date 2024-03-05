@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import SearchInput from '../component/SearchInput';
 import SearchList from './SearchList';
 import { PageHeader } from '../component/STitle';
-import axios from 'axios';
 import { ShowContext } from '../contexts/ShowContext';
 
 export default function Main({

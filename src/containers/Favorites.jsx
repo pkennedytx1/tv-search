@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { PageHeader } from '../component/STitle'
-import { Container, Card, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Card, Row, Col, Button } from 'react-bootstrap';
 import { ShowContext } from '../contexts/ShowContext';
 
 export default function Favorites({ favorites }) {

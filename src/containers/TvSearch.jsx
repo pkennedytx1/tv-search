@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import Main from './Main';
 import Favorites from './Favorites';
 import ToWatch from './ToWatch';
-import { RouterProvider, createBrowserRouter, redirect } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Navigation from '../component/Navigation';
 import { ShowProvider } from '../contexts/ShowContext';
-import { createWatchLater, getAllWatchLater } from '../utils/endpoints/toWatchLater.js';
+import { createWatchLater } from '../utils/endpoints/toWatchLater.js';
 import { getFavorites } from '../utils/endpoints/favorites.js';
 import Auth from './Auth.jsx';
 import PrivateRoute from '../component/PrivateRoute.jsx';
